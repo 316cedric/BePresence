@@ -30,8 +30,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         btLogin = (Button) findViewById(R.id.btLogin);
 
         btLogin.setOnClickListener(this);
-
-
     }
 
     @Override
@@ -48,6 +46,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     editor.apply();
                     editor.commit();
                     startActivity(i);
+                    finish();
                 } else {
                     Toast.makeText(getBaseContext(), "Invalid INL ID or Password", Toast.LENGTH_LONG).show();
                 }

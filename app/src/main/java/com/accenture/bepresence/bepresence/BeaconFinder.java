@@ -1,8 +1,11 @@
 package com.accenture.bepresence.bepresence;
 
 import android.app.Activity;
+import android.app.AlarmManager;
 import android.app.AlertDialog;
+import android.app.PendingIntent;
 import android.bluetooth.BluetoothAdapter;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -19,6 +22,8 @@ import com.estimote.sdk.BeaconManager;
 import com.parse.Parse;
 import com.parse.ParseObject;
 
+import java.util.Calendar;
+
 public class BeaconFinder extends Activity {
 
     TextView hello;
@@ -29,31 +34,42 @@ public class BeaconFinder extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+//        Calendar cal = Calendar.getInstance();
+//        cal.set(Calendar.HOUR_OF_DAY, 16);
+//
+//        Intent intent = new Intent(this, EstimoteService.class);
+//        PendingIntent pendingIntent = PendingIntent.getService(getBaseContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+//
+//        AlarmManager alarmManager= (AlarmManager)this.getApplicationContext().getSystemService(Context.ALARM_SERVICE);
+//        alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), 30000, pendingIntent);
+
+        startService(new Intent(getBaseContext(), EstimoteService.class));
         setContentView(R.layout.activity_beacon_finder);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
-        if(!isBluetoothAvailable()) {
-            DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    switch (which){
-                        case DialogInterface.BUTTON_POSITIVE:
-                            BluetoothAdapter.getDefaultAdapter().enable();
-                            break;
-
-                        case DialogInterface.BUTTON_NEGATIVE:
-                            //No button clicked
-                            break;
-                    }
-                }
-            };
-
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setMessage("Enable Bluetooth?")
-                    .setPositiveButton("Yes", dialogClickListener)
-                    .setNegativeButton("No", dialogClickListener)
-                    .show();
-        }
+//        if(!isBluetoothAvailable()) {
+//            DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+//                @Override
+//                public void onClick(DialogInterface dialog, int which) {
+//                    switch (which){
+//                        case DialogInterface.BUTTON_POSITIVE:
+//                            BluetoothAdapter.getDefaultAdapter().enable();
+//                            break;
+//
+//                        case DialogInterface.BUTTON_NEGATIVE:
+//                            //No button clicked
+//                            break;
+//                    }
+//                }
+//            };
+//
+//            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+//            builder.setMessage("Enable Bluetooth?")
+//                    .setPositiveButton("Yes", dialogClickListener)
+//                    .setNegativeButton("No", dialogClickListener)
+//                    .show();
+//        }
 
         SharedPreferences sharedPreferences = getSharedPreferences("pref", MODE_PRIVATE);
         userid = sharedPreferences.getString("inl","");
@@ -68,41 +84,41 @@ public class BeaconFinder extends Activity {
 
     @Override
     protected void onNewIntent(Intent intent) {
-        Log.d("helloAdd", "insode");
-        String id = intent.getStringExtra("intentid");
-        String title = "", message = "";
-        switch (id) {
-            case "onInsideRange":
-                title = intent.getStringExtra("title");
-                message = intent.getStringExtra("message");
-                hello = (TextView) findViewById(R.id.helloWorld);
-                hello.setTextColor(Color.RED);
-                hello.setTextSize(22);
-                hello.setText(title + "\n" + message);
-                testObject.put("User", userid);
-                testObject.put("Region", title);
-                testObject.put("UUID", message);
-                testObject.saveInBackground();
-                break;
-
-            case "onExitRange":
-                title = intent.getStringExtra("title");
-                message = intent.getStringExtra("message");
-                hello = (TextView) findViewById(R.id.helloWorld);
-                hello.setTextColor(Color.BLUE);
-                hello.setTextSize(22);
-                hello.setText(title + "\n" + message);
-                break;
-        }
+//        Log.d("helloAdd", "insode");
+//        String id = intent.getStringExtra("intentid");
+//        String title = "", message = "";
+//        switch (id) {
+//            case "onInsideRange":
+//                title = intent.getStringExtra("title");
+//                message = intent.getStringExtra("message");
+//                hello = (TextView) findViewById(R.id.helloWorld);
+//                hello.setTextColor(Color.RED);
+//                hello.setTextSize(22);
+//                hello.setText(title + "\n" + message);
+//                testObject.put("User", userid);
+//                testObject.put("Region", title);
+//                testObject.put("UUID", message);
+//                testObject.saveInBackground();
+//                break;
+//
+//            case "onExitRange":
+//                title = intent.getStringExtra("title");
+//                message = intent.getStringExtra("message");
+//                hello = (TextView) findViewById(R.id.helloWorld);
+//                hello.setTextColor(Color.BLUE);
+//                hello.setTextSize(22);
+//                hello.setText(title + "\n" + message);
+//                break;
+//        }
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent notifyintent) {
-        String title = notifyintent.getStringExtra("title");
-        String message = notifyintent.getStringExtra("message");
-        hello.setTextColor(Color.RED);
-        hello.setTextSize(22);
-        hello.setText(title + "\n" + message);
+//        String title = notifyintent.getStringExtra("title");
+//        String message = notifyintent.getStringExtra("message");
+//        hello.setTextColor(Color.RED);
+//        hello.setTextSize(22);
+//        hello.setText(title + "\n" + message);
     }
 
     public static boolean isBluetoothAvailable() {

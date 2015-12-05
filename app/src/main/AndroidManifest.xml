@@ -26,9 +26,6 @@
         </activity>
 
         <service
-            android:name="com.estimote.sdk.service.BeaconService"
-            android:exported="false" />
-        <service
             android:name=".EstimoteService"
             android:enabled="true"
             android:exported="true" />
@@ -42,5 +39,4 @@
             </intent-filter>
         </activity>
     </application>
-
 </manifest>
