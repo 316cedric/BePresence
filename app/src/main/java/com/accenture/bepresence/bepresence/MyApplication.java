@@ -7,6 +7,8 @@ import android.util.Log;
 import com.estimote.sdk.Beacon;
 import com.estimote.sdk.BeaconManager;
 import com.estimote.sdk.Region;
+import com.parse.Parse;
+
 import java.util.List;
 import java.util.UUID;
 
@@ -29,12 +31,15 @@ public class MyApplication extends Application {
     public  void  onCreate(){
 
         super.onCreate();
+        Parse.enableLocalDatastore(this);
+        Parse.initialize(this, "z6s54jozGB8MAwNhWvw2iRk38lMDSTvOpOsvRPgX", "hJPTsyIuxF3qGWvU5tjgMq2NfFatIKgpEgsGpV78");
+
         beaconManager = new BeaconManager(getApplicationContext());
 singleton = this;
           beaconManager.connect(new BeaconManager.ServiceReadyCallback(){
               @Override
           public  void  onServiceReady() {
-                  beaconManager.startMonitoring(new Region("mybeacon", UUID.fromString("B9407F30-F5F8-466E-AFF9-25556B57FE6D"), 6459, 51635));
+                  beaconManager.startMonitoring(new Region("mybeacon", UUID.fromString("B9407F30-F5F8-466E-AFF9-25556B57FE6D"), 64235, 19344));
 
               }
           });

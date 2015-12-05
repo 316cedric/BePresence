@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -12,6 +13,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.estimote.sdk.BeaconManager;
 import com.parse.Parse;
@@ -20,7 +22,7 @@ import com.parse.ParseObject;
 public class BeaconFinder extends Activity {
 
     TextView hello;
-    String userid = "Cedric";
+    String userid;
     private BeaconManager beaconManager;
     ParseObject testObject;
 
@@ -53,8 +55,11 @@ public class BeaconFinder extends Activity {
                     .show();
         }
 
-        Parse.enableLocalDatastore(this);
-        Parse.initialize(this, "vZvVJLS5kNJvej08Xa416icWEVSDAEphhjyGHkdC", "FOaCvfK4783jXwinPd8ViGyIra5gkqwXHJyDypas");
+        SharedPreferences sharedPreferences = getSharedPreferences("pref", MODE_PRIVATE);
+        userid = sharedPreferences.getString("inl","");
+
+        Toast.makeText(this,userid,Toast.LENGTH_LONG).show();
+
         testObject = new ParseObject("Presence");
 
         beaconManager = new BeaconManager(getApplicationContext());
