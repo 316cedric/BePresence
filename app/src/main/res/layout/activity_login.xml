@@ -54,25 +54,22 @@
         android:layout_marginBottom="20dp"
         android:textSize="25dp"/>
     <TextView
-        android:text="PASSWORD"
+        android:text="Shift Time"
         android:textSize="15dp"
         android:textColor="#333333"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
-    <EditText
-        android:password="true"
-        android:layout_width="match_parent"
+    <TimePicker
+        android:id="@+id/tpShiftTime"
         android:layout_height="wrap_content"
-        android:id="@+id/etPassword"
-        android:textColor="#333333"
-        android:layout_marginBottom="20dp"
-        android:textSize="25dp"/>
+        android:layout_width="match_parent"
+        ></TimePicker>
         <Button
             android:id="@+id/btLogin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#333333"
-            android:text="LOGIN"
+            android:text="SAVE"
             android:textSize="20dp"
             android:textColor="#ffffff"/>
     </LinearLayout>
