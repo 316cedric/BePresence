@@ -9,20 +9,6 @@
     tools:context="com.accenture.bepresence.bepresence.LoginActivity">
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="5dp"
-        android:background="#ffffff">
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="50dp"
-        android:gravity="center"
-        android:text="BePresence"
-        android:textColor="#1163b5"/>
-    </LinearLayout>
-
-    <LinearLayout
         android:layout_marginTop="30dp"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
@@ -59,11 +45,21 @@
         android:textColor="#333333"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
-    <TimePicker
-        android:id="@+id/tpShiftTime"
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        ></TimePicker>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        <NumberPicker
+            android:layout_marginRight="15dp"
+            android:id="@+id/npShiftHour"
+            android:gravity="left"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"/>
+        <NumberPicker
+            android:id="@+id/npShiftMinute"
+            android:gravity="right"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"/>
+        </LinearLayout>
         <Button
             android:id="@+id/btLogin"
             android:layout_width="match_parent"
