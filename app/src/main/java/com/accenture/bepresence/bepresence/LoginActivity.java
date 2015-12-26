@@ -12,10 +12,15 @@ import android.widget.NumberPicker;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.google.android.gms.iid.InstanceID;
 import com.parse.LogInCallback;
 import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseUser;
+
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -66,5 +71,30 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 }
             }
         });
+    }
+
+
+
+    private void callGcmFirstTime() throws IOException {
+      String iid=  InstanceID.getInstance(this.getApplicationContext()).getId();
+        String scope="GCM";
+        String authorizedEntity="bepresence-438b7";
+        String token=InstanceID.getInstance(this.getApplicationContext()).getToken(authorizedEntity,scope);
+
+        String server="http://localhost:64152/";
+
+        String q = "values/";
+        try
+        {
+            URL url = new URL(server+q+token);
+            HttpURLConnection conn = ( HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("POST");
+            Log.e("HTTPREQ",token+url);
+        }
+        finally {
+
+        }
+
+
     }
 }
