@@ -30,10 +30,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.activity_login);
 
         minutes = new String[]{"00","15","30","45"};
-//        minutes[0] = Integer.toString(0);
-//        minutes[1] = Integer.toString(15);
-//        minutes[2] = Integer.toString(30);
-//        minutes[3] = Integer.toString(45);
 
         etInl = (EditText) findViewById(R.id.etInl);
         npShiftHour = (NumberPicker) findViewById(R.id.npShiftHour);
